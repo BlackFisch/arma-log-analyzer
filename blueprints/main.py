@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+from time import time
+from os import path, remove
 from flask import Blueprint, request, redirect, url_for, flash
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
+from analyzer.analyze import Loglevel, analyze_logfile
 from config import ANALYZER_CFG
 
 main_handlers = Blueprint('main_handlers', __name__)
@@ -33,8 +36,16 @@ def landing():
         return redirect('/')
 
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        print(file)
+        filename = path.join('data', secure_filename(
+            f'{round(time())}_{file.filename}'))
+
+        file.save(filename)
+        with open(filename, 'r', encoding='utf-8') as f:
+            # print(f.read())
+
+            analyze_logfile(f, Loglevel.DEBUG)
+
+        remove(filename)
         # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
     return "yay"
