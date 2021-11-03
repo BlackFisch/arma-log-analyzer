@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from _pyio import TextIOWrapper
-from re import findall, match
+from re import findall
 from enum import Enum
 from patterns import debug, info, warnings, errors, fatal
 
@@ -17,13 +17,23 @@ class Loglevel(Enum):
 def analyze_logfile(file: TextIOWrapper, verbosity_level: Loglevel):
 
     (verbosity_level, _) = verbosity_level.value
-    # f_content = file.read()
-    lines = file.readlines()
-    found = []
+    f_content = file.read()
+    found = {}
 
     for level in Loglevel:
         (prio, patterns) = level.value
         if prio < verbosity_level:
             continue
 
-    print(lines)
+        found[level.name] = []
+
+        for p_name, val in patterns.items():
+            (pattern, desc) = val
+
+            matches = [match.split('\n')
+                       for match in findall(pattern, f_content)]
+            if not matches:
+                continue
+            found[level.name].append([p_name, desc, matches])
+
+    return found

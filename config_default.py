@@ -3,6 +3,10 @@ SERVER_CFG = {
     'port':     8000,
     'ssl': {
         'certfile': '',
-        'keyfile': ''
+        'keyfile':  ''
     }
+}
+
+ANALYZER_CFG = {
+    'allowed_extensions': ['txt', 'rpt']
 }

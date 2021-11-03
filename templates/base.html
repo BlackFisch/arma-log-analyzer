@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        {% block head %}
+            <title>
+                {% block title %}{% endblock %} - Arma Log File Analyzer</title>
+
+            <link rel="stylesheet" href="/static/css/main.css">
+            <!-- <link rel="stylesheet" href="static/css/error.css"> -->
+
+            <link href="https://static.blackfisch.me/bootstrap-5.0.2/css/bootstrap.min.css" rel="stylesheet">
+            {# <link href="https://static.blackfisch.me/bootstrap-icons-1.7.0/bootstrap-icons.css" rel="stylesheet"> #}
+            <script src='https://static.blackfisch.me/bootstrap-5.0.2/js/bootstrap.bundle.min.js'></script>
+        {% endblock %}
+    </head>
+
+    <body>
+        {# <header class="p-3 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap" /></svg> -->
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li>
+                            <a href="/" class="nav-link px-2 text-white">Home</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-2 text-white">Features</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-2 text-white">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-2 text-white">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="/legal" class="nav-link px-2 text-white">Legal</a>
+                        </li>
+                    </ul>
+
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" class="form-control form-control-dark" placeholder="Search..."
+                        aria-label="Search">
+                    </form>
+
+                    <div class="text-end">
+                        <!-- <button type="button" class="btn btn-outline-light me-2">Login</button> -->
+                        {% block login %}
+                            <a class="btn btn-success center" href="/dashboard" role="button">
+                                <i class="bi bi-house"></i>&nbsp;Dashboard</a>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </header> #}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2 px-4 fixed-bottom">
+            <p class="col-md-4 mb-0 text-muted">&copy; 2021 blackfisch</p>
+
+            {# <a href="/"
+            class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <!-- <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap" /></svg> -->
+            </a> #}
+
+            {# <ul class="nav col-md-6 justify-content-end">
+                <li class="nav-item">
+                    <a href="/" class="nav-link px-2 text-muted">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-muted">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/legal" class="nav-link px-2 text-muted">Legal</a>
+                </li>
+            </ul> #}
+        </footer>
+
+    </body>
+
+</html>
