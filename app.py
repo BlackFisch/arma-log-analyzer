@@ -82,7 +82,7 @@ def landing():
 
     # check if the post request has the file part
     if 'file' not in request.files:
-        return redirect(request.url)
+        return redirect('/')
 
     file = request.files['file']
     if file.filename == '':
