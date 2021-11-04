@@ -3,9 +3,9 @@
 from gevent.pywsgi import WSGIServer
 from app import app
 try:
-    from config import ANALYZER_CFG, SERVER_CFG
+    from config import SERVER_CFG
 except ImportError:
-    from config_default import ANALYZER_CFG, SERVER_CFG
+    from config_default import SERVER_CFG
 
 hostName = SERVER_CFG['hostname']
 serverPort = SERVER_CFG['port']
@@ -13,12 +13,7 @@ serverPort = SERVER_CFG['port']
 SSL_CFG = SERVER_CFG['ssl']
 secured = len(SSL_CFG) > 0
 
-try:
-    http_server = WSGIServer((hostName, serverPort), app, **SSL_CFG)
-    print(
-        f'Server created at http{"s" if secured else ""}://{hostName}:{serverPort}')
-    http_server.serve_forever()
-except KeyboardInterrupt:
-    pass
-
-print('Webserver stopped.')
+http_server = WSGIServer((hostName, serverPort), app, **SSL_CFG)
+print(
+    f'Server created at http{"s" if secured else ""}://{hostName}:{serverPort}')
+http_server.serve_forever()
