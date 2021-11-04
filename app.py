@@ -7,7 +7,10 @@ from flask_babel import Babel, gettext
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
 from analyze import Loglevel, analyze_logfile
-from config import ANALYZER_CFG, SERVER_CFG
+try:
+    from config import ANALYZER_CFG, SERVER_CFG
+except ImportError:
+    from config_default import ANALYZER_CFG, SERVER_CFG
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
