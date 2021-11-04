@@ -1,16 +1,14 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3-slim
+FROM python:3
 
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY run_server.py /app/run_server.py
-COPY app.py /app/app.py
-COPY . /app
+COPY . .
 
 EXPOSE 8000
 
-CMD python run_server.py
+CMD ["python", "run_server.py"]
