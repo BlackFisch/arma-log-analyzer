@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 print(1)
 from gevent.pywsgi import WSGIServer
 print(2)
