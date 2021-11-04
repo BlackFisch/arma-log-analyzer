@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 from gevent.pywsgi import WSGIServer
-from config import SERVER_CFG
 from app import app
+try:
+    from config import ANALYZER_CFG, SERVER_CFG
+except ImportError:
+    from config_default import ANALYZER_CFG, SERVER_CFG
 
 hostName = SERVER_CFG['hostname']
 serverPort = SERVER_CFG['port']
