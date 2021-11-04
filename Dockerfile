@@ -1,14 +1,14 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.10-bullseye
+FROM python:3.10
 
 WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 
-COPY . .
+COPY . /app
 
 EXPOSE 8000
 
-CMD [ "python3", "run_server.py"]
+CMD python run_server.py

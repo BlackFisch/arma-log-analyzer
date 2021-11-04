@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 
 from gevent.pywsgi import WSGIServer
+from gevent import monkey
 from app import app
 try:
     from config import SERVER_CFG
 except ImportError:
     from config_default import SERVER_CFG
+
+print('Setting up PYWSGI server')
+
+monkey.patch_all()
 
 hostName = SERVER_CFG['hostname']
 serverPort = SERVER_CFG['port']
