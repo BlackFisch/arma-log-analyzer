@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
-
+print(1)
 from gevent.pywsgi import WSGIServer
+print(2)
 from gevent import monkey
+print(3)
 from app import app
+print(4)
 try:
+    print(5)
     from config import SERVER_CFG
+    print(5.1)
 except ImportError:
+    print(5.2)
     from config_default import SERVER_CFG
+    print(5.3)
 
 print('Setting up PYWSGI server')
 
