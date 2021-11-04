@@ -1,97 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}
-    {% if supported_filetypes %}
-        Upload File
-    {% else %}
-        Log Errors
-    {% endif %}
-{% endblock %}
-
-{% block login %}
-    {% if show_login %}
-        <a class='btn btn-primary' href='/login' role='button'>
-            <i class='bi bi-discord'></i>&nbsp;Login</a>
-    {% else %}
-        {{ super() }}
-    {% endif %}
+    {{LOCALIZED_STRINGS.get('UploadFile')}}
 {% endblock %}
 
 {% block content %}
+
+    <div class="dropdown">
+        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Language
+            </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            {% for language in AVAILABLE_LANGUAGES.items() %}
+                <li>
+                    <a class="dropdown-item" href="{{ url_for('set_language', language=language[0]) }}" >{{ language[1] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
     <div class='px-4 py-5 my-5 text-center'>
-        {% if has_err %}
-            <h1 class='display-4'>Errors Found</h1>
-            <div class='accordion' id='accordionLevels'>
-                {% for level, found in results.items() %}
-                    {% if found %}
-                        <div class='accordion-item'>
-                            <h2 class='accordion-header' id='heading{{ level }}'>
-                                <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse{{ level }}' aria-expanded='false' aria-controls='collapse{{ level }}'>
-                                    Errors in Loglevel {{ level }}
-                                </button>
-                            </h2>
-                            <div id='collapse{{ level }}' class='accordion-collapse collapse' aria-labelledby='heading{{ level }}' data-bs-parent='#accordionLevels'>
-                                <div class='accordion-body'>
-                                    <div class='accordion' id='accordion{{ level }}'>
-                                        {% for name, desc,
-                                        matches in found %}
-                                            <div class='accordion-item'>
-                                                <h2 class='accordion-header' id='heading{{ loop.index }}'>
-                                                    <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse{{ loop.index }}' aria-expanded='false' aria-controls='collapse{{ loop.index }}'>
-                                                        {{ name}}
-                                                    </button>
-                                                </h2>
-                                                <div id='collapse{{ loop.index }}' class='accordion-collapse collapse' aria-labelledby='heading{{ loop.index }}' data-bs-parent='#accordion{{ level }}'>
-                                                    <div class='accordion-body'>
-                                                        <p class='alert alert-info'>
-                                                            <strong>{{ desc|safe }}</strong>
-                                                        </p>
-                                                        {% for match in matches %}
-                                                            <code>
-                                                                {% for line in match %}
-                                                                    {{ line }}<br/>
-                                                                {% endfor %}
-                                                            </code>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% elif supported_filetypes %}
-                <form method='post' enctype='multipart/form-data'>
-                    <div class='form-group'>
-                        <label for='file'>Select file</label>
-                        <input type='file' accept='{{ supported_filetypes }}' class='form-control' name='file'>
-                        <small class='form-text text-muted'>Please select a Arma 3 Logfile in rpt or txt file format.</small>
-                    </div>
-                    <br/>
-                    <div class='form-group'>
-                        <label for='loglevel'>Select minimum loglevel</label>
-                        <select class='form-select' name='loglevel'>
-                            {% for level in levels %}
-                                <option value='{{ level }}'>{{ level }}</option>
-                            {% endfor %}
-                        </select>
-                        <small class='form-text text-muted'>The lowest shown Error Level. Lower means more information will be gathered from your log.</small>
-                    </div>
-                    <br/>
-                    <br/>
+        <form method='post' enctype='multipart/form-data'>
+            <div class='form-group'>
+                <label for='file'>{{LOCALIZED_STRINGS.get('SelFile')}}</label>
+                <input type='file' accept='{{ supported_filetypes }}' class='form-control' name='file'>
+                <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelFileDesc')}}</small>
+            </div>
+            <br/>
+            <div class='form-group'>
+                <label for='loglevel'>{{LOCALIZED_STRINGS.get('SelLoglevel')}}</label>
+                <select class='form-select' name='loglevel'>
+                    {% for level in levels %}
+                        <option value='{{ level }}'>{{ level }}</option>
+                    {% endfor %}
+                </select>
+                <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelLoglevel')}}</small>
+            </div>
+            <br/>
+            <br/>
 
-                    <button type='submit' class='btn btn-primary'>Upload</button>
-                </form>
-            {% else %}
-                <h1 class='display-4'>No Errors Found</h1>
-            {% endif %}
-
-            {% if not supported_filetypes %}
-                <br/>
-                <br/>
-                <a role='button' class='btn btn-info' href='/'>Upload another file</a>
-            {% endif %}
-        </div>
-    {% endblock %}
+            <button type='submit' class='btn btn-primary'>{{LOCALIZED_STRINGS.get('Upload')}}</button>
+        </form>
+    </div>
+{% endblock %}

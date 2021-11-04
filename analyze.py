@@ -4,6 +4,7 @@ from _pyio import TextIOWrapper
 from re import findall
 from enum import Enum
 from patterns import debug, info, warnings, errors, fatal
+from flask_babel import gettext
 
 
 class Loglevel(Enum):

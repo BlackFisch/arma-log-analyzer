@@ -1,0 +1,68 @@
+# German translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-11-04 09:55+0100\n"
+"PO-Revision-Date: 2021-11-04 09:35+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: app.py:40
+msgid "Select file"
+msgstr "Datei auswählen"
+
+#: app.py:41
+msgid "Please select a Arma 3 Logfile in rpt or txt file format."
+msgstr "Bitte wähle eine Arma 3 Logdatei im rpt oder txt Dateiformat aus."
+
+#: app.py:42
+msgid "Select the minimum loglevel"
+msgstr "Wähle das niedrigste Loglevel aus"
+
+#: app.py:43
+msgid ""
+"The lowest shown Error Level. Lower means more information will be "
+"gathered from your log."
+msgstr ""
+"Das niedrigste Loglevel, welches angezeigt wird. Niedrigere Level "
+"bedeuten mehr Informationen, die aus dem Log extrahiert werden."
+
+#: app.py:44
+msgid "Upload"
+msgstr "Hochladen"
+
+#: app.py:45
+msgid "Upload Logfile"
+msgstr "Logdatei hochladen"
+
+#: app.py:46
+msgid "Upload another logfile"
+msgstr "Weitere Log hochladen"
+
+#: app.py:47
+msgid "Analysis results"
+msgstr "Analyseergebnisse"
+
+#: app.py:48
+msgid "Log Errors found:"
+msgstr "gefundene Logmeldungen:"
+
+#: app.py:49
+msgid "Results in log level:"
+msgstr "Ergebnisse im Loglevel:"
+
+#: app.py:50
+msgid "No errors have been found, good job!"
+msgstr "Keine Fehler gefunden, gute Arbeit!"
+
