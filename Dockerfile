@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python", "run_server.py"]
+CMD ["python", "test.py"]
