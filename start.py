@@ -6,4 +6,4 @@ print(app)
 
 http_server = WSGIServer(('localhost', 8000), app)
 print('Started Webserver')
-http_server.serve_forever()
+# http_server.serve_forever()
