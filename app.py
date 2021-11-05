@@ -32,6 +32,8 @@ app.config.update({
 @app.context_processor
 def inject_conf_var():
     return {
+        'pageName': 'Arma Log Analyzer',
+        'requestedUrl': request.url,
         'AVAILABLE_LANGUAGES': app.config['LANGUAGES'],
         'CURRENT_LANGUAGE': session.get('language', request.accept_languages.best_match(app.config['LANGUAGES'].keys())),
         'LOCALIZED_STRINGS': prepare_texts()

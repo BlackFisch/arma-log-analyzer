@@ -1,45 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'base-tmpl/base.html.jinja2' %}
 {% block title %}
-    {{LOCALIZED_STRINGS.get('UploadFile')}}
+{{LOCALIZED_STRINGS.get('UploadFile')}}
+{% endblock %}
+
+{% block headerRight %}
+<div class="dropdown">
+    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        Language
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for language in AVAILABLE_LANGUAGES.items() %}
+        <li>
+            <a class="dropdown-item" href="{{ url_for('set_language', language=language[0]) }}">{{ language[1] }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
 
 {% block content %}
+<div class='px-4 py-5 my-5 text-center'>
+    <form method='post' enctype='multipart/form-data'>
+        <div class='form-group'>
+            <label for='file'>{{LOCALIZED_STRINGS.get('SelFile')}}</label>
+            <input type='file' accept='{{ supported_filetypes }}' class='form-control' name='file'>
+            <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelFileDesc')}}</small>
+        </div>
+        <br />
+        <div class='form-group'>
+            <label for='loglevel'>{{LOCALIZED_STRINGS.get('SelLoglevel')}}</label>
+            <select class='form-select' name='loglevel'>
+                {% for level in levels %}
+                <option value='{{ level }}'>{{ level }}</option>
+                {% endfor %}
+            </select>
+            <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelLoglevel')}}</small>
+        </div>
+        <br />
+        <br />
 
-    <div class="dropdown">
-        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Language
-            </a>
-
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            {% for language in AVAILABLE_LANGUAGES.items() %}
-                <li>
-                    <a class="dropdown-item" href="{{ url_for('set_language', language=language[0]) }}" >{{ language[1] }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class='px-4 py-5 my-5 text-center'>
-        <form method='post' enctype='multipart/form-data'>
-            <div class='form-group'>
-                <label for='file'>{{LOCALIZED_STRINGS.get('SelFile')}}</label>
-                <input type='file' accept='{{ supported_filetypes }}' class='form-control' name='file'>
-                <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelFileDesc')}}</small>
-            </div>
-            <br/>
-            <div class='form-group'>
-                <label for='loglevel'>{{LOCALIZED_STRINGS.get('SelLoglevel')}}</label>
-                <select class='form-select' name='loglevel'>
-                    {% for level in levels %}
-                        <option value='{{ level }}'>{{ level }}</option>
-                    {% endfor %}
-                </select>
-                <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelLoglevel')}}</small>
-            </div>
-            <br/>
-            <br/>
-
-            <button type='submit' class='btn btn-primary'>{{LOCALIZED_STRINGS.get('Upload')}}</button>
-        </form>
-    </div>
+        <button type='submit' class='btn btn-primary'>{{LOCALIZED_STRINGS.get('Upload')}}</button>
+    </form>
+</div>
 {% endblock %}
