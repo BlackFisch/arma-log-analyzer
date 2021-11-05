@@ -61,8 +61,9 @@ def prepare_texts():
 
 @babel.localeselector
 def get_locale():
-    if request.args.lang:
+    if request.args.get('lang'):
         return request.args.lang
+
     return request.cookies.get('bfme_pref_lang', request.accept_languages.best_match(app.config['LANGUAGES'].keys()))
 
 
