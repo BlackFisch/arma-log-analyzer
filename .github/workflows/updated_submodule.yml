@@ -5,6 +5,7 @@ on:
     types: [ updated-submodule ]
 
 jobs:
+  update-and-commit:
     runs-on: ubuntu-latest
 
     steps:
