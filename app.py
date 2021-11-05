@@ -80,7 +80,7 @@ def allowed_file(filename):
 @ app.route('/', methods=['POST', 'GET'])
 def landing():
     if request.method == 'GET':
-        return render_template('index.html', supported_filetypes=ALLOWED_FILETYPES, levels=LOGLEVELS)
+        return render_template('index.html', title=gettext('UploadFile'), supported_filetypes=ALLOWED_FILETYPES, levels=LOGLEVELS)
 
     # check if the post request has the file part
     if 'file' not in request.files:
@@ -108,4 +108,4 @@ def landing():
                 has_errors = True
                 break
 
-    return render_template('output.html', results=res, has_err=has_errors)
+    return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
