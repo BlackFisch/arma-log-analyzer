@@ -2,17 +2,10 @@
 
 FROM python:3.8-slim
 
-EXPOSE 8000
+EXPOSE 3031
 
 RUN apt-get update
 RUN apt-get install -y build-essential
-
-
-# RUN apk add --no-cache \
-#     uwsgi-python3 \
-#     python3\
-#     libc-dev\
-#     gcc
 
 COPY . .
 
