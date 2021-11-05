@@ -5,7 +5,8 @@ EXPOSE 8000
 
 RUN apk add --no-cache \
     uwsgi-python3 \
-    python3
+    python3\
+    gcc
 
 COPY . .
 
