@@ -1,9 +1,9 @@
-print(1)
-from gevent.pywsgi import WSGIServer
-print(2)
-from gevent import monkey
-print(3)
 from app import app
+from gevent import monkey
+from gevent.pywsgi import WSGIServer
+print(1)
+print(2)
+print(3)
 print(4)
 try:
     print(5)
@@ -14,8 +14,8 @@ except ImportError:
     from config_default import SERVER_CFG
     print(5.3)
 
-print('Setting up PYWSGI server')
 
+print('Setting up PYWSGI server')
 monkey.patch_all()
 
 hostName = SERVER_CFG['hostname']
