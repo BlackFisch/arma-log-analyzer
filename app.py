@@ -71,10 +71,10 @@ def get_locale():
 
 @app.route('/accept-cookies')
 def accept_cookies():
-    res = make_response()
-    res.set_cookie('bfme_accepted_cookies', 'true',
+    res = make_response(redirect(request.args.get('redirect_to', '/')))
+    res.set_cookie('bfme_cookies_accepted', 'true',
                    max_age=31536000, domain='.blackfisch.me')
-    return redirect(request.args.get('redirect_to', '/'))
+    return res
 
 
 @app.route('/language=<language>')
