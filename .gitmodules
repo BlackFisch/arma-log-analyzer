@@ -1,3 +1,4 @@
 [submodule "templates/base-tmpl"]
 	path = templates/base-tmpl
 	url = git@github.com:BlackFisch/blackfisch.me-base-templates.git
+	branch = main
