@@ -3,6 +3,7 @@
 from time import time
 from os import path, remove
 from flask import Flask, request, redirect, session
+from flask.helpers import make_response
 from flask_babel import Babel, gettext
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
@@ -22,6 +23,7 @@ LOGLEVELS = [l.name for l in Loglevel]
 
 app.config.update({
     'SECRET_KEY': str(SERVER_CFG.get('secret_key')),
+    'SESSION_PERMANENT': False,
     'LANGUAGES': {
         'en': 'English',
         'de': 'Deutsch'
@@ -32,6 +34,7 @@ app.config.update({
 @app.context_processor
 def inject_conf_var():
     return {
+        'cookies_accepted': request.cookies.get('bfme_cookies_accepted'),
         'pageName': 'Arma Log Analyzer',
         'requestedUrl': request.url,
         'AVAILABLE_LANGUAGES': app.config['LANGUAGES'],
@@ -64,6 +67,14 @@ def get_locale():
     if request.args.get('language'):
         session['language'] = request.args.get('language')
     return session.get('language', 'en')
+
+
+@app.route('/accept-cookies')
+def accept_cookies():
+    res = make_response()
+    res.set_cookie('bfme_accepted_cookies', 'true',
+                   max_age=31536000, domain='.blackfisch.me')
+    return redirect(request.url)
 
 
 @app.route('/language=<language>')
