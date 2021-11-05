@@ -61,12 +61,9 @@ def prepare_texts():
 
 @babel.localeselector
 def get_locale():
-    # try to guess the language from the user accept
-    # header the browser transmits.  We support de/fr/en in this
-    # example.  The best match wins.
-    if request.args.get('language'):
-        session['language'] = request.args.get('language')
-    return session.get('language', 'en')
+    if request.args.lang:
+        return request.args.lang
+    return request.cookies.get('bfme_pref_lang', request.accept_languages.best_match(app.config['LANGUAGES'].keys()))
 
 
 @app.route('/accept-cookies')
@@ -79,8 +76,13 @@ def accept_cookies():
 
 @app.route('/language=<language>')
 def set_language(language=None):
-    session['language'] = language
-    return redirect('/')
+    if not request.cookies.get('bfme_pref_lang'):
+        return redirect(f'/?lang={language}')
+
+    res = make_response(redirect('/'))
+    res.set_cookie('bfme_pref_lang', 'language',
+                   max_age=31536000, domain='.blackfisch.me')
+    return res
 
 
 def allowed_file(filename):
