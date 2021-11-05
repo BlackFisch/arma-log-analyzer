@@ -74,7 +74,7 @@ def accept_cookies():
     res = make_response()
     res.set_cookie('bfme_accepted_cookies', 'true',
                    max_age=31536000, domain='.blackfisch.me')
-    return redirect(request.url)
+    return redirect(request.args.get('redirect_to', '/'))
 
 
 @app.route('/language=<language>')
