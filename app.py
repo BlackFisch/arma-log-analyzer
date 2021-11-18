@@ -7,14 +7,15 @@ from flask.helpers import make_response
 from flask_babel import Babel, gettext
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import RequestEntityTooLarge
 from analyze import Loglevel, analyze_logfile
+from helpers import bytes_to_unit
 try:
     from config import ANALYZER_CFG, SERVER_CFG
 except ImportError:
     from config_default import ANALYZER_CFG, SERVER_CFG
 
 app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
 babel = Babel(app)
 
 ALLOWED_EXTS = ANALYZER_CFG.get('allowed_extensions', [])
@@ -22,6 +23,7 @@ ALLOWED_FILETYPES = ','.join([f'.{ext}' for ext in ALLOWED_EXTS])
 LOGLEVELS = [l.name for l in Loglevel]
 
 app.config.update({
+    'MAX_CONTENT_LENGTH': SERVER_CFG.get('max_upload_size', 20000000),
     'SECRET_KEY': str(SERVER_CFG.get('secret_key')),
     'SESSION_PERMANENT': False,
     'LANGUAGES': {
@@ -46,7 +48,7 @@ def inject_conf_var():
 def prepare_texts():
     return {
         'SelFile': gettext('Select file'),
-        'SelFileDesc': gettext('Please select a Arma 3 Logfile in rpt or txt file format.'),
+        'SelFileDesc': gettext('Please select a Arma 3 Logfile in one of the following file format: '),
         'SelLoglevel': gettext('Select the minimum loglevel'),
         'SelLoglevelDesc': gettext('The lowest shown Error Level. Lower means more information will be gathered from your log.'),
         'Upload': gettext('Upload'),
@@ -55,14 +57,16 @@ def prepare_texts():
         'Output': gettext('Analysis results'),
         'FoundErrors': gettext('Log Errors found:'),
         'ErrInLevel': gettext('Results in log level:'),
-        'NoErrors': gettext('No errors have been found, good job!')
+        'NoErrors': gettext('No errors have been found, good job!'),
+        'MaxSize': gettext('Maximum allowed filesize: '),
+        'TooLarge': gettext('The uploaded file exceeded the maximum allowed filesize. Please try again with a different file.')
     }
 
 
 @babel.localeselector
 def get_locale():
     if request.args.get('lang'):
-        return request.args.lang
+        return request.args.get('lang')
 
     return request.cookies.get('bfme_pref_lang', request.accept_languages.best_match(app.config['LANGUAGES'].keys()))
 
@@ -94,32 +98,37 @@ def allowed_file(filename):
 @ app.route('/', methods=['POST', 'GET'])
 def landing():
     if request.method == 'GET':
-        return render_template('index.html', title=gettext('UploadFile'), supported_filetypes=ALLOWED_FILETYPES, levels=LOGLEVELS)
+        return render_template('index.html', title=gettext('UploadFile'), supported_filetypes=ALLOWED_FILETYPES, levels=LOGLEVELS, max_size=bytes_to_unit(app.config.get('MAX_CONTENT_LENGTH')), error=request.args.get('error'))
 
-    # check if the post request has the file part
-    if 'file' not in request.files:
-        return redirect('/')
+    if request.method == 'POST':
+        try:
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                return redirect('/')
 
-    file = request.files['file']
-    if file.filename == '':
-        return redirect('/')
+            file = request.files['file']
+            if file.filename == '':
+                return redirect('/')
 
-    res = None
+            res = None
 
-    if file and allowed_file(file.filename):
-        filename = path.join('data', secure_filename(
-            f'{round(time())}_{file.filename}'))
+            if file and allowed_file(file.filename):
+                filename = path.join('data', secure_filename(
+                    f'{round(time())}_{file.filename}'))
 
-        file.save(filename)
-        with open(filename, 'r', encoding='utf-8') as f:
-            res = analyze_logfile(f, Loglevel[request.form['loglevel']])
+                file.save(filename)
+                with open(filename, 'r', encoding='utf-8') as f:
+                    res = analyze_logfile(
+                        f, Loglevel[request.form['loglevel']])
 
-        remove(filename)
+                remove(filename)
 
-        has_errors = False
-        for v in res.values():
-            if v:
-                has_errors = True
-                break
+                has_errors = False
+                for v in res.values():
+                    if v:
+                        has_errors = True
+                        break
 
-    return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
+            return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
+        except RequestEntityTooLarge:
+            return redirect('/?error=TooLarge')

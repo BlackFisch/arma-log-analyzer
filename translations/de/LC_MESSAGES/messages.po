@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-04 09:55+0100\n"
+"POT-Creation-Date: 2021-11-18 10:41+0100\n"
 "PO-Revision-Date: 2021-11-04 09:35+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,19 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:40
+#: app.py:50
 msgid "Select file"
 msgstr "Datei auswählen"
 
-#: app.py:41
-msgid "Please select a Arma 3 Logfile in rpt or txt file format."
-msgstr "Bitte wähle eine Arma 3 Logdatei im rpt oder txt Dateiformat aus."
+#: app.py:51
+#, fuzzy
+msgid "Please select a Arma 3 Logfile in one of the following file format: "
+msgstr "Bitte wähle eine Arma 3 Logdatei in einem der folgenden Dateiformate: "
 
-#: app.py:42
+#: app.py:52
 msgid "Select the minimum loglevel"
 msgstr "Wähle das niedrigste Loglevel aus"
 
-#: app.py:43
+#: app.py:53
 msgid ""
 "The lowest shown Error Level. Lower means more information will be "
 "gathered from your log."
@@ -38,31 +39,50 @@ msgstr ""
 "Das niedrigste Loglevel, welches angezeigt wird. Niedrigere Level "
 "bedeuten mehr Informationen, die aus dem Log extrahiert werden."
 
-#: app.py:44
+#: app.py:54
 msgid "Upload"
 msgstr "Hochladen"
 
-#: app.py:45
+#: app.py:55
 msgid "Upload Logfile"
 msgstr "Logdatei hochladen"
 
-#: app.py:46
+#: app.py:56
 msgid "Upload another logfile"
 msgstr "Weitere Log hochladen"
 
-#: app.py:47
+#: app.py:57
 msgid "Analysis results"
 msgstr "Analyseergebnisse"
 
-#: app.py:48
+#: app.py:58
 msgid "Log Errors found:"
 msgstr "gefundene Logmeldungen:"
 
-#: app.py:49
+#: app.py:59
 msgid "Results in log level:"
 msgstr "Ergebnisse im Loglevel:"
 
-#: app.py:50
+#: app.py:60
 msgid "No errors have been found, good job!"
 msgstr "Keine Fehler gefunden, gute Arbeit!"
 
+#: app.py:61
+msgid "Maximum allowed filesize: "
+msgstr "Maximale Dateigröße: "
+
+#: app.py:62
+msgid ""
+"The uploaded file exceeded the maximum allowed filesize. Please try again"
+" with a different file."
+msgstr "Die hochgeladene Datei überschreitet die maximale erlaubte Dateigröße."
+" Bitte versuche es mit einer anderen Datei erneut."
+
+#: app.py:101
+#, fuzzy
+msgid "UploadFile"
+msgstr "Logdatei hochladen"
+
+#: app.py:132
+msgid "Output"
+msgstr "Ergebnis"

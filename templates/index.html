@@ -22,11 +22,21 @@
 
 {% block content %}
 <div class='px-4 py-5 my-5 text-center'>
+    {% if error %}
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
+        <div>
+            {{LOCALIZED_STRINGS.get(error, 'An unknown error occured.')}}
+        </div>
+    </div>
+    {% endif %}
     <form method='post' enctype='multipart/form-data'>
         <div class='form-group'>
             <label for='file'>{{LOCALIZED_STRINGS.get('SelFile')}}</label>
             <input type='file' accept='{{ supported_filetypes }}' class='form-control' name='file'>
-            <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelFileDesc')}}</small>
+            <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('SelFileDesc')}} {{',
+                '.join(supported_filetypes.split(','))}}</small><br />
+            <small class='form-text text-muted'>{{LOCALIZED_STRINGS.get('MaxSize')}} {{max_size}}</small>
         </div>
         <br />
         <div class='form-group'>
