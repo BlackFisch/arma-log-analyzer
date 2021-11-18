@@ -22,6 +22,19 @@
 
 {% block content %}
     <div class='px-4 py-5 my-5 text-center'>
+
+        <div class="alert alert-info d-flex align-items-center ep-" role="alert">
+            <i class="bi bi-info-square-fill sm-1 em-2"></i>&nbsp;
+            <div>
+            This is still Work in Progress. Not all errors are detected, we are still working on match patterns. Please
+            be patient and report undetected errors over on Github or directly on Discord to
+            blackfisch#1467.<br/><br/>
+            Dieses Projekt ist noch in der Entwicklung. Nicht alle Fehler werden erkannt, wir arbeiten noch an den Match
+            Patterns. Bitte habe Gedult und melde nicht entdeckte Fehler über Github oder Discord direkt an
+            blackfisch#1467.<br/><br/>
+            </div>
+        </div>
+
         {% if error %}
             <div class="alert alert-danger d-flex align-items-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
