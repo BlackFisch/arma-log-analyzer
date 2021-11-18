@@ -65,7 +65,9 @@ def prepare_texts():
         'ErrInLevel': gettext('Results in log level:'),
         'NoErrors': gettext('No errors have been found, good job!'),
         'MaxSize': gettext('Maximum allowed filesize: '),
-        'TooLarge': gettext('The uploaded file exceeded the maximum allowed filesize. Please try again with a different file.')
+        'TooLarge': gettext('The uploaded file exceeded the maximum allowed filesize. Please try again with a different file.'),
+        'UnicodeError': gettext('An Unicode Error occured. We are aware of the issue and working on a solution. In the meantime, please copy the contents of your logfile, paste it into an empty txt file and try agian.'),
+        'UnknownError': gettext('An unknown error occured. Your file has been saved and the issue will be investigated.')
     }
 
 
@@ -138,6 +140,10 @@ def landing():
             return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
         except RequestEntityTooLarge:
             return redirect('/?error=TooLarge')
+        except UnicodeDecodeError:
+            return redirect('/?error=UnicodeError')
+        except:
+            return redirect('/?error=UnknownError')
 
 
 if __name__ == '__main__':
