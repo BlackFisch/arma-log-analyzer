@@ -1,4 +1,4 @@
-{% extends 'base-tmpl/base.html.jinja2' %}
+{% extends 'base.html.jinja2' %}
 {% block title %}
     {{LOCALIZED_STRINGS.get('Output')}}
 {% endblock %}
@@ -12,23 +12,28 @@
                     {% if found %}
                         <div class='accordion-item'>
                             <h2 class='accordion-header' id='heading{{ level }}'>
-                                <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse{{ level }}' aria-expanded='false' aria-controls='collapse{{ level }}'>
+                                <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse'
+                    data-bs-target='#collapse{{ level }}' aria-expanded='false' aria-controls='collapse{{ level }}'>
                                     {{LOCALIZED_STRINGS.get('ErrInLevel')}}
                                     {{ level }}
                                 </button>
                             </h2>
-                            <div id='collapse{{ level }}' class='accordion-collapse collapse' aria-labelledby='heading{{ level }}' data-bs-parent='#accordionLevels'>
+                            <div id='collapse{{ level }}' class='accordion-collapse collapse' aria-labelledby='heading{{ level }}'
+                data-bs-parent='#accordionLevels'>
                                 <div class='accordion-body'>
                                     <div class='accordion' id='accordion{{ level }}'>
                                         {% for name, desc,
                                         matches in found %}
                                             <div class='accordion-item'>
                                                 <h2 class='accordion-header' id='heading{{ loop.index }}'>
-                                                    <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse{{ loop.index }}' aria-expanded='false' aria-controls='collapse{{ loop.index }}'>
+                                                    <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse'
+                                    data-bs-target='#collapse{{ loop.index }}' aria-expanded='false'
+                                    aria-controls='collapse{{ loop.index }}'>
                                                         {{ name}}
                                                     </button>
                                                 </h2>
-                                                <div id='collapse{{ loop.index }}' class='accordion-collapse collapse' aria-labelledby='heading{{ loop.index }}' data-bs-parent='#accordion{{ level }}'>
+                                                <div id='collapse{{ loop.index }}' class='accordion-collapse collapse'
+                                aria-labelledby='heading{{ loop.index }}' data-bs-parent='#accordion{{ level }}'>
                                                     <div class='accordion-body'>
                                                         <p class='alert alert-info'>
                                                             <strong>{{ desc|safe }}</strong>
