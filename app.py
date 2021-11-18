@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from time import time
-from os import path, remove
+from os import path, remove, sep, mkdir
 from flask import Flask, request, redirect, session
 from flask.helpers import make_response
 from flask_babel import Babel, gettext
@@ -21,6 +21,12 @@ babel = Babel(app)
 ALLOWED_EXTS = ANALYZER_CFG.get('allowed_extensions', [])
 ALLOWED_FILETYPES = ','.join([f'.{ext}' for ext in ALLOWED_EXTS])
 LOGLEVELS = [l.name for l in Loglevel]
+DATA_DIR = ANALYZER_CFG.get('data_dir', 'data')
+
+if not path.exists(DATA_DIR):
+    for sub_path in DATA_DIR.split(sep):
+        if not path.exists(sub_path):
+            mkdir(sub_path)
 
 app.config.update({
     'MAX_CONTENT_LENGTH': SERVER_CFG.get('max_upload_size', 20000000),
@@ -113,7 +119,7 @@ def landing():
             res = None
 
             if file and allowed_file(file.filename):
-                filename = path.join('data', secure_filename(
+                filename = path.join(DATA_DIR, secure_filename(
                     f'{round(time())}_{file.filename}'))
 
                 file.save(filename)
@@ -132,3 +138,7 @@ def landing():
             return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
         except RequestEntityTooLarge:
             return redirect('/?error=TooLarge')
+
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=8000, debug=True)

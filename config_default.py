@@ -1,7 +1,8 @@
 from os import getenv as env
 
 ANALYZER_CFG = {
-    'allowed_extensions': ['txt', 'rpt']
+    'allowed_extensions':   env('ALLOWED_EXTS', 'txt rpt').split(' '),
+    'data_dir':             env('DATA_DIR', 'data')
 }
 
 SERVER_CFG = {
