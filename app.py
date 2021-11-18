@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from sys import stderr
 from time import time
 from os import path, remove, sep, mkdir
 from flask import Flask, request, redirect, session
@@ -135,6 +136,7 @@ def landing():
                             res = analyze_logfile(
                                 f, Loglevel[request.form['loglevel']])
                     except UnicodeDecodeError:
+                        print(e, file=stderr)
                         return redirect('/?error=UnicodeError')
 
                 remove(filename)
@@ -146,11 +148,14 @@ def landing():
                         break
 
             return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
-        except RequestEntityTooLarge:
+        except RequestEntityTooLarge as e:
+            print(e, file=stderr)
             return redirect('/?error=TooLarge')
-        except UnicodeDecodeError:
+        except UnicodeDecodeError as e:
+            print(e, file=stderr)
             return redirect('/?error=UnicodeError')
-        except:
+        except Exception as e:
+            print(e, file=stderr)
             return redirect('/?error=UnknownError')
 
 
