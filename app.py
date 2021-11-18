@@ -125,9 +125,17 @@ def landing():
                     f'{round(time())}_{file.filename}'))
 
                 file.save(filename)
-                with open(filename, 'r', encoding='utf-8') as f:
-                    res = analyze_logfile(
-                        f, Loglevel[request.form['loglevel']])
+                try:
+                    with open(filename, 'r', encoding='utf-8') as f:
+                        res = analyze_logfile(
+                            f, Loglevel[request.form['loglevel']])
+                except UnicodeDecodeError:
+                    try:
+                        with open(filename, 'r', encoding='latin-1') as f:
+                            res = analyze_logfile(
+                                f, Loglevel[request.form['loglevel']])
+                    except UnicodeDecodeError:
+                        return redirect('/?error=UnicodeError')
 
                 remove(filename)
 
