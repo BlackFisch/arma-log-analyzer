@@ -99,11 +99,6 @@ def set_language(language=None):
     return res
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTS
-
-
 @ app.route('/', methods=['POST', 'GET'])
 def landing():
     if request.method == 'GET':
@@ -121,7 +116,7 @@ def landing():
 
             res = None
 
-            if file and allowed_file(file.filename):
+            if file:
                 filename = path.join(DATA_DIR, secure_filename(
                     f'{round(time())}_{file.filename}'))
 
