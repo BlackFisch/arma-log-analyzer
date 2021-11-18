@@ -130,7 +130,7 @@ def landing():
                         with open(filename, 'r', encoding='latin-1') as f:
                             res = analyze_logfile(
                                 f, Loglevel[request.form['loglevel']])
-                    except UnicodeDecodeError:
+                    except UnicodeDecodeError as e:
                         print(e, file=stderr)
                         return redirect('/?error=UnicodeError')
 
