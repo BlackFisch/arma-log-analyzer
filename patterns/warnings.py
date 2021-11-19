@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from .common import TS, NL, CODE
 
 PATTERNS = {
     'CBA: Class does not support Extended Eventhandlers': [
@@ -29,4 +30,8 @@ PATTERNS = {
         r'\d\d:\d\d:\d\d Error: Bone .* doesn\'t exist in skeleton .*[\r\n]{0,}',
         'There is bones missing in the specified skeleton. This might be caused by ported content from an older ArmA title. This has to be fixed in the model.'
     ],
+    'Embedded skeleton differs': [
+        rf'\d\d:\d\d:\d\d Warning Message: Embedded skeleton.*{NL}',
+        'The skeleton in the specified P3D-file differs from the embedded P3D. This might cause this model/skeleton to not work correctly. This might be caused by a typo somewhere.'
+    ]
 }

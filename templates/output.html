@@ -39,11 +39,13 @@
                                                             <strong>{{ desc|safe }}</strong>
                                                         </p>
                                                         {% for match in matches %}
-                                                            <code>
-                                                                {% for line in match %}
-                                                                    {{ line }}<br/>
-                                                                {% endfor %}
-                                                            </code>
+                                                            <p class="border border-secondary border-3 rounded-1 mb-1">
+                                                                <code>
+                                                                    {% for line in match %}
+                                                                        {{ line }}<br/>
+                                                                    {% endfor %}
+                                                                </code>
+                                                            </p>
                                                         {% endfor %}
                                                     </div>
                                                 </div>

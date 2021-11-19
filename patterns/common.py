@@ -1,2 +1,3 @@
-TIMESTAMP = r'\s*\d\d?:\d\d:\d\d(\d\d)?\s*'
-NEWLINE = r'[\r\n]{1,2}'
+TS = r'\s*\d\d?:\d\d:\d\d\s*'
+NL = r'\s'
+CODE = r'\s+<([^>])+>'
