@@ -3,6 +3,9 @@
 from sys import stderr
 from time import time
 from os import path, remove, sep, mkdir
+from io import TextIOWrapper
+import werkzeug.exceptions as wzex
+from traceback import print_exception
 from flask import Flask, request, redirect, session
 from flask.helpers import make_response
 from flask_babel import Babel, gettext
@@ -68,7 +71,8 @@ def prepare_texts():
         'MaxSize': gettext('Maximum allowed filesize: '),
         'TooLarge': gettext('The uploaded file exceeded the maximum allowed filesize. Please try again with a different file.'),
         'UnicodeError': gettext('An Unicode Error occured. We are aware of the issue and working on a solution. In the meantime, please copy the contents of your logfile, paste it into an empty txt file and try agian.'),
-        'UnknownError': gettext('An unknown error occured. Your file has been saved and the issue will be investigated.')
+        'UnknownError': gettext('An unknown error occured. Your file has been saved and the issue will be investigated.'),
+        'TypeIsWrong': gettext('The uploaded file is not a logfile. Please upload a logfile.')
     }
 
 
@@ -99,6 +103,10 @@ def set_language(language=None):
     return res
 
 
+def check_filetype(file: TextIOWrapper):
+    pass
+
+
 @ app.route('/', methods=['POST', 'GET'])
 def landing():
     if request.method == 'GET':
@@ -123,15 +131,17 @@ def landing():
                 file.save(filename)
                 try:
                     with open(filename, 'r', encoding='utf-8') as f:
+                        check_filetype(f)
                         res = analyze_logfile(
                             f, Loglevel[request.form['loglevel']])
                 except UnicodeDecodeError:
                     try:
                         with open(filename, 'r', encoding='latin-1') as f:
+                            check_filetype(f)
                             res = analyze_logfile(
                                 f, Loglevel[request.form['loglevel']])
                     except UnicodeDecodeError as e:
-                        print(e, file=stderr)
+                        print_exception(e, file=stderr)
                         return redirect('/?error=UnicodeError')
 
                 remove(filename)
@@ -144,13 +154,14 @@ def landing():
 
             return render_template('output.html', title=gettext('Output'), results=res, has_err=has_errors)
         except RequestEntityTooLarge as e:
-            print(e, file=stderr)
             return redirect('/?error=TooLarge')
         except UnicodeDecodeError as e:
-            print(e, file=stderr)
+            print_exception(e, file=stderr)
             return redirect('/?error=UnicodeError')
+        except wzex.UnsupportedMediaType as e:
+            return redirect(f'/?error=TypeIsWrong')
         except Exception as e:
-            print(e, file=stderr)
+            print_exception(e, file=stderr)
             return redirect('/?error=UnknownError')
 
 

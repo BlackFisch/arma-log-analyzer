@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-18 23:02+0100\n"
+"POT-Creation-Date: 2021-11-19 07:45+0100\n"
 "PO-Revision-Date: 2021-11-04 09:35+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app.py:56
+#: app.py:61
 msgid "Select file"
 msgstr "Datei auswählen"
 
-#: app.py:57
+#: app.py:62
 #, fuzzy
 msgid "Please select a Arma 3 Logfile in one of the following file format: "
 msgstr "Bitte wähle eine Arma 3 Logdatei in einem der folgenden Dateiformate: "
 
-#: app.py:58
+#: app.py:63
 msgid "Select the minimum loglevel"
 msgstr "Wähle das niedrigste Loglevel aus"
 
-#: app.py:59
+#: app.py:64
 msgid ""
 "The lowest shown Error Level. Lower means more information will be "
 "gathered from your log."
@@ -39,39 +39,39 @@ msgstr ""
 "Das niedrigste Loglevel, welches angezeigt wird. Niedrigere Level "
 "bedeuten mehr Informationen, die aus dem Log extrahiert werden."
 
-#: app.py:60
+#: app.py:65
 msgid "Upload"
 msgstr "Hochladen"
 
-#: app.py:61
+#: app.py:66
 msgid "Upload Logfile"
 msgstr "Logdatei hochladen"
 
-#: app.py:62
+#: app.py:67
 msgid "Upload another logfile"
 msgstr "Weitere Log hochladen"
 
-#: app.py:63
+#: app.py:68
 msgid "Analysis results"
 msgstr "Analyseergebnisse"
 
-#: app.py:64
+#: app.py:69
 msgid "Log Errors found:"
 msgstr "gefundene Logmeldungen:"
 
-#: app.py:65
+#: app.py:70
 msgid "Results in log level:"
 msgstr "Ergebnisse im Loglevel:"
 
-#: app.py:66
+#: app.py:71
 msgid "No errors have been found, good job!"
 msgstr "Keine Fehler gefunden, gute Arbeit!"
 
-#: app.py:67
+#: app.py:72
 msgid "Maximum allowed filesize: "
 msgstr "Maximale Dateigröße: "
 
-#: app.py:68
+#: app.py:73
 msgid ""
 "The uploaded file exceeded the maximum allowed filesize. Please try again"
 " with a different file."
@@ -79,27 +79,34 @@ msgstr ""
 "Die hochgeladene Datei überschreitet die maximale erlaubte Dateigröße. "
 "Bitte versuche es mit einer anderen Datei erneut."
 
-#: app.py:69
+#: app.py:74
 msgid ""
 "An Unicode Error occured. We are aware of the issue and working on a "
 "solution. In the meantime, please copy the contents of your logfile, "
 "paste it into an empty txt file and try agian."
-msgstr "Es ist ein Unicode Fehler aufgetreten. Dieser Fehler ist bekannt "
-"und eine Lösung bereits in Arbeit. Bis dahin, kopiere bitte den Inhalt deiner "
+msgstr ""
+"Es ist ein Unicode Fehler aufgetreten. Dieser Fehler ist bekannt und eine"
+" Lösung bereits in Arbeit. Bis dahin, kopiere bitte den Inhalt deiner "
 "Logdatei, füge ihn in eine leere txt Datei ein und versuche es erneut."
 
-#: app.py:70
+#: app.py:75
 msgid ""
 "An unknown error occured. Your file has been saved and the issue will be "
 "investigated."
-msgstr "Ein unbekannter Fehler ist aufgetreten. Deine Logdatei wurde gespeichert "
+msgstr ""
+"Ein unbekannter Fehler ist aufgetreten. Deine Logdatei wurde gespeichert "
 "und der Fehler wird untersucht werden."
 
-#: app.py:109
+#: app.py:76
+#, fuzzy
+msgid "The uploaded file is not a logfile. Please upload a logfile."
+msgstr "Die hochgeladene Datei ist keine Logdatei. Bitte lade eine Logdatei hoch."
+
+#: app.py:114
 #, fuzzy
 msgid "UploadFile"
 msgstr "Logdatei hochladen"
 
-#: app.py:140
+#: app.py:156
 msgid "Output"
 msgstr "Ergebnis"
