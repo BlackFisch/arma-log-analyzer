@@ -107,6 +107,11 @@ def check_filetype(file: TextIOWrapper):
     pass
 
 
+@app.route('/changelog')
+def changelog():
+    return render_template('changelog.html')
+
+
 @ app.route('/', methods=['POST', 'GET'])
 def landing():
     if request.method == 'GET':

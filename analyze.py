@@ -31,8 +31,8 @@ def analyze_logfile(file: TextIOWrapper, verbosity_level: Loglevel):
         for p_name, val in patterns.items():
             (pattern, desc) = val
 
-            matches = [match.split('\n')
-                       for match in findall(pattern, f_content)]
+            matches = [match[0].split('\n')
+                       for match in findall(rf'({pattern})', f_content)]
             if not matches:
                 continue
             found[level.name].append([p_name, desc, matches])

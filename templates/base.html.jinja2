@@ -4,6 +4,35 @@
     <meta property="og:locale:alternate" content="en_GB"/>
 {% endblock %}
 
+{% block headerRight %}
+    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <li>
+            <a href="/" class="nav-link text-light">
+                <i class="bi bi-code-slash"></i>&nbsp;Upload Logfile
+            </a>
+        </li>
+        <li>
+            <a href="/changelog" class="nav-link text-warning">
+                <i class="bi bi-code-slash"></i>&nbsp;Changelog
+            </a>
+        </li>
+        <li class="dropdown">
+            <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        Language
+    </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% for language in AVAILABLE_LANGUAGES.items() %}
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('set_language', language=language[0]) }}">{{ language[1] }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
 {% block footer_content %}
     <a href="https://github.com/blackfisch/arma-log-analyzer" class="link-secondary text-decoration-none">
         <i class="bi bi-github"></i> Source Code on GitHub</a>

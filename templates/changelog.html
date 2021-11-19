@@ -1,0 +1,41 @@
+{% extends 'base.html.jinja2' %}
+{% block title %}
+{{LOCALIZED_STRINGS.get('UploadFile')}}
+{% endblock %}
+
+{% block content %}
+<div class='px-4 py-5 my-5 text-center'>
+
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+        <div class="ms-auto me-auto">
+            Project Status: <span class="badge bg-warning">Work in Progress</span>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12">
+
+            <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 1.1.0</span> - 19th Nov
+                2021</h5>
+            <ul class="list-unstyled mt-3">
+                <li class="text-muted ml-3"><i class="mr-2"></i>Added: Support for "Error Generic in Expression"</li>
+                <li class="text-muted ml-3"><i class="mr-2"></i>Added: Support for "Error Type X expected Y"</li>
+                <li class="text-muted ml-3"><i class="mr-2"></i>Fixed: Only part of the pattern being matched</li>
+                <li class="text-muted ml-3"><i class="mr-2"></i>Tweaked: Created constants for use in Regex (improve
+                    readlability)</li>
+                <li class="text-muted ml-3"><i class="mr-2"></i>Known Issue: no filetype recognition, will try to parse
+                    errors on e.g. images</li>
+            </ul>
+
+            <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 1.0.0</span> - 18th Nov
+                2021</h5>
+            <ul class="list-unstyled mt-3">
+                <li class="text-muted ml-3"><i class="mr-2"></i>Initial Release</li>
+            </ul>
+        </div>
+        <!--end col-->
+    </div>
+
+</div>
+{% endblock %}

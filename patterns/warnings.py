@@ -24,5 +24,9 @@ PATTERNS = {
     "Warning: not an array": [
         r'\d\d:\d\d:\d\d Warning Message: .*not an array[\r\n]{0,}',
         'The specified config attribute was expected to be an array but is not. Fixing this might be hard, since most of the times the class is unknown.'
-    ]
+    ],
+    'Bone doesn\'t exist': [
+        r'\d\d:\d\d:\d\d Error: Bone .* doesn\'t exist in skeleton .*[\r\n]{0,}',
+        'There is bones missing in the specified skeleton. This might be caused by ported content from an older ArmA title. This has to be fixed in the model.'
+    ],
 }
